@@ -18,6 +18,46 @@ def spide_house_info():
     complete_house_info(settings.TYPOS['villa'], house_list)
 
 
+def spide_office_info():
+    office_list = Shop.objects.all()
+    complete_office_info(settings.TYPOS['shop'], office_list)
+    office_list = Office.objects.all()
+    complete_office_info(settings.TYPOS['office'], office_list)
+
+
+
+def complete_office_info(office_type, offices):
+    for new_office in offices:
+        prefix_url = offices.href
+        f_url = prefix_url
+        resp = requests.get(f_url)
+        resp.encoding = 'gbk'
+        soup = BeautifulSoup(resp.text, 'lxml')
+        contents = soup.find('div', class_='xiangqing').find_all('dd')
+        title = soup.h1.get_text()
+
+        new_office.name = title
+        new_office_attr = {}
+        for item in contents:
+            attr_kv = item.get_text().split(u'：')
+            new_office_attr[attr_kv[0]] = attr_kv[1]
+
+        try:
+            new_office.category = new_office_attr[u'物业类别']
+        except Exception as e:
+            print(e)
+        try:
+            new_office.area = new_office_attr[u'建筑面积']
+        except Exception as e:
+            print(e)
+        try:
+            new_office.parking = new_office_attr[u'停 车 位']
+        except Exception as e:
+            print(e)
+
+        new_office.save()
+
+
 def complete_house_info(house_type, houses):
     for new_house in houses:
         prefix_url = new_house.href
