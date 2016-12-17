@@ -29,6 +29,9 @@ def spide_office_info():
 def complete_office_info(office_type, offices):
     for new_office in offices:
         prefix_url = offices.href
+        if not prefix_url.startswith('http'):
+            continue
+
         f_url = prefix_url
         resp = requests.get(f_url)
         resp.encoding = 'gbk'
