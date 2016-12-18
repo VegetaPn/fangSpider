@@ -33,23 +33,23 @@
 安装：  
 
 1. 装好Python2.7和MySQL
-1. 执行pip --version，若报错则安装pip
-2. 满足2之后，进入项目目录，执行pip install -r requirements.txt  
+2. 执行pip --version，若报错则安装pip
+3. 满足2之后，进入项目目录，执行sudo pip install -r requirements.txt  (若安装失败则为系统原因，需逐项安装requirements.txt中的依赖项)
 
 配置：  
 
-1. 修改fangSpider/settings.py文件中的DATABASES部分，改为自己数据库的配置（NAME-数据库名称，USER-数据库用户名，PASSWORD-密码）
+1. 修改fangSpider/settings.py文件中的DATABASES部分，改为自己数据库的配置（NAME: 数据库名称，USER: 数据库用户名，PASSWORD: 密码）
 2. 修改main.py和grab\_urls.py文件的PATH\_TO\_PROJECT变量值为当前项目的绝对路径
 
 ### 第一次运行  
-注意：第一次运行时需要做以下步骤： 
+第一次运行时需要做以下步骤： 
 
 1. 安装和配置
 2. 进入项目目录
-2. 执行python manage.py makemigrations
-3. 执行python manage.py migrate
-3. 执行python grab_urls.py 抓取列表和url到数据库
-4. 执行python main.py 开始爬取数据
+3. 执行python manage.py makemigrations
+4. 执行python manage.py migrate
+5. 执行python grab_urls.py 抓取列表和url到数据库
+6. 执行python main.py 开始爬取数据
 
 以后再运行时直接执行第2、6步即可。  
 

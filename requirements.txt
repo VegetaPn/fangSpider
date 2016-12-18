@@ -1,0 +1,8 @@
+setuptools
+beautifulsoup4
+bs4
+Django==1.9
+MySQL-python
+PyMySQL
+requests
+lxml
