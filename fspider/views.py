@@ -150,6 +150,7 @@ def spide_house(house_type, page_no=1):
 
 def collect_typo_urls(typo, max_page):
     for i in range(max_page):
+        time.sleep(2)
         spide_house(typo, str(i))
 
 
