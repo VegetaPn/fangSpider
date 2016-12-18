@@ -11,6 +11,8 @@ class House(models.Model):
     households = models.IntegerField(default=0)
     volume_rate = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)
     greening_rate = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)
+    region = models.CharField(max_length=100, default='N/A')
+    hx_position = models.CharField(max_length=100, default='N/A')
     href = models.CharField(max_length=200, default='')
 
 
@@ -21,6 +23,8 @@ class Villa(models.Model):
     households = models.IntegerField(default=0)
     volume_rate = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)
     greening_rate = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)
+    region = models.CharField(max_length=100, default='N/A')
+    hx_position = models.CharField(max_length=100, default='N/A')
     href = models.CharField(max_length=200, default='')
 
 

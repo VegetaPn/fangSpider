@@ -14,5 +14,4 @@ application = get_wsgi_application()
 
 from fspider import views
 
-views.spide_house_info()
-views.spide_office_info()
+views.collect_all_urls()

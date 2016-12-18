@@ -20,8 +20,8 @@ def spide_house_info():
 
 
 def spide_office_info():
-    # office_list = Shop.objects.filter(name='N/A')
-    # complete_office_info(settings.TYPOS['shop'], office_list)
+    office_list = Shop.objects.filter(name='N/A')
+    complete_office_info(settings.TYPOS['shop'], office_list)
     office_list = Office.objects.filter(name='N/A')
     complete_office_info(settings.TYPOS['office'], office_list)
 
@@ -102,6 +102,14 @@ def complete_house_info(house_type, houses):
             print(e)
         try:
             new_house.households = int(new_house_attr[u'当期户数'][0:-1])
+        except Exception as e:
+            print(e)
+        try:
+            new_house.region = new_house_attr[u'所属区域']
+        except Exception as e:
+            print(e)
+        try:
+            new_house.hx_position = new_house_attr[u'环线位置']
         except Exception as e:
             print(e)
 
