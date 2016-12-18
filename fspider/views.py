@@ -8,6 +8,7 @@ from fangSpider import settings
 from bs4 import BeautifulSoup
 import requests
 import logging
+import time
 
 
 # Create your views here.
@@ -19,16 +20,17 @@ def spide_house_info():
 
 
 def spide_office_info():
-    office_list = Shop.objects.all()
-    complete_office_info(settings.TYPOS['shop'], office_list)
-    office_list = Office.objects.all()
+    # office_list = Shop.objects.filter(name='N/A')
+    # complete_office_info(settings.TYPOS['shop'], office_list)
+    office_list = Office.objects.filter(name='N/A')
     complete_office_info(settings.TYPOS['office'], office_list)
 
 
 
 def complete_office_info(office_type, offices):
     for new_office in offices:
-        prefix_url = offices.href
+        time.sleep(settings.SLEEP_INTERVAL)
+        prefix_url = new_office.href
         if not prefix_url.startswith('http'):
             continue
 
@@ -36,7 +38,11 @@ def complete_office_info(office_type, offices):
         resp = requests.get(f_url)
         resp.encoding = 'gbk'
         soup = BeautifulSoup(resp.text, 'lxml')
-        contents = soup.find('div', class_='xiangqing').find_all('dd')
+        try:
+            contents = soup.find('div', class_='xiangqing').find_all('dd')
+        except Exception as e:
+            print(e)
+            continue
         title = soup.h1.get_text()
 
         new_office.name = title
@@ -50,7 +56,7 @@ def complete_office_info(office_type, offices):
         except Exception as e:
             print(e)
         try:
-            new_office.area = new_office_attr[u'建筑面积']
+            new_office.area = int(new_office_attr[u'建筑面积'][0:-3])
         except Exception as e:
             print(e)
         try:
@@ -63,6 +69,7 @@ def complete_office_info(office_type, offices):
 
 def complete_house_info(house_type, houses):
     for new_house in houses:
+        time.sleep(settings.SLEEP_INTERVAL)
         prefix_url = new_house.href
         if not prefix_url.startswith('http'):
             continue

@@ -135,3 +135,5 @@ TYPOS = {
     'shop': '3',
     'office': '4',
 }
+
+SLEEP_INTERVAL = 4
