@@ -2,7 +2,7 @@
 
 ## 北京——住宅&别墅&商铺&写字楼 Spider项目  
 
-采用Python2.7 + Django1.8 + BeautifulSoup4  
+采用Python2.7 + BeautifulSoup4 + Django1.9 + MySQL5.x  
 
 ### 需求  
 抓取北京住宅&别墅&商铺&写字楼的以下信息存于数据库中：   
